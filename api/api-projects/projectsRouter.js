@@ -2,6 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
+const actionsRouter = require('../api-actions/actionsRouter');
+
+router.use('/:id/actions', actionsRouter);
+
 const Projects = require('../../data/helpers/projectModel');
 
 // create a new project
