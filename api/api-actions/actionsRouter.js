@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 
 const Actions = require('../../data/helpers/actionModel');
+const { response } = require('../server');
 
 // create action to a specified user
 router.post('/', (req, res) => {
@@ -33,6 +34,28 @@ router.get('/:id', (req, res) => {
   Actions.get(req.params.id)
     .then((action) => {
       res.status(200).json(action);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+// put one action belonging to specified user
+router.put('/:id', (req, res) => {
+  Actions.update(req.params.id, req.body)
+    .then((action) => {
+      res.status(200).json(action);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+// delete one action belonging to specified user
+router.delete('/:id', (req, res) => {
+  Actions.remove(req.params.id)
+    .then((action) => {
+      res.status(200).json({ message: `records removed ${action}` });
     })
     .catch((error) => {
       console.log(error);
