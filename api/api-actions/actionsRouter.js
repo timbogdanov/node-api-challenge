@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 
 const Actions = require('../../data/helpers/actionModel');
-const { response } = require('../server');
+const Projects = require('../../data/helpers/projectModel');
 
 // create action to a specified user
 router.post('/', (req, res) => {
@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 
 // get all actions belonging to specified user
 router.get('/', (req, res) => {
-  Actions.get()
+  Projects.getProjectActions(req.params.id)
     .then((actions) => {
       res.status(200).json(actions);
     })
